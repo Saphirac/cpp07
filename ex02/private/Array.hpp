@@ -32,7 +32,9 @@ private :
 	{
 	private:
 		virtual char const	*what(void) const throw()
+		{
 			return "index is out of range";
+		}
 	};
 public :
 
@@ -50,8 +52,6 @@ public :
 	{
 		if (DEBUG)
 			std::cout << "Array constructor called\n";
-		for (int i = 0; i < this->_size; i++)
-			this->_array[i] = 0;
 	}
 
 	Array<T>(Array<T> const &src) :
@@ -60,8 +60,6 @@ public :
 	{
 		if (DEBUG)
 			std::cout << "Array copy constructor called\n";
-		for (int i = 0; i < src._size; i++)
-			this->_array[i] = src._array[i];
 	}
 
 	~Array<T>(void)
@@ -87,7 +85,7 @@ public :
 			delete [] this->_array;
 			this->_size = src._size;
 			this->_array = new T[src._size];
-			for (int i = 0; i < src._size; i++)
+			for (size_t i = 0; i < src._size; i++)
 				this->_array[i] = src._array[i];
 		}
 		return *this;
@@ -99,6 +97,17 @@ public :
 			throw OutOfRangeException();
 		return this->_array[i];
 	}
+};
+
+template <typename T>
+std::ostream	&operator<<(std::ostream &o, Array<T> &src)
+{
+	uint	i;
+
+	o << "Array:" << std::endl;
+	for (i = 0 ; i < src.size() ; ++i)
+		o << "\t" "_array[" << i << "]: " << src[i] << std::endl;
+	return o;
 }
 
 #endif
