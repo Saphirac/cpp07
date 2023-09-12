@@ -6,7 +6,7 @@
 /*   By: mcourtoi <mcourtoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:14:09 by mcourtoi          #+#    #+#             */
-/*   Updated: 2023/09/11 19:03:23 by mcourtoi         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:06:34 by mcourtoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,30 @@ static void	__test3(void)
 static void	__test4(void)
 {
 	Array<std::string>	a(6);
+	Array<std::string>	b(4);
 
-	std::cout << a << std::endl;
+	for (int i = 0; i < 4; i++)
+		b[i] = "before";
+	std::cout << "b : " << b << std::endl;
+	for (int i = 0; i < 6; i++)
+		a[i] = "test";
+	b = a;
+	std::cout << "a : " << a << std::endl;
+	std::cout << "b : " << b << std::endl;
+
+	try {	
+		std::cout << "exception : " << b[7] << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << '\n';
+	}
 }
 
 static void	__test5(void)
 {
-	Array<int>	a(2);
+	Array<int>	a;
 
-	try
-	{
-		std::cout << a[3] << '\n';
-	}
-	catch (std::exception &e)
-	{
-		e.what();
-	}
 	std::cout << a << std::endl;
 }
 
